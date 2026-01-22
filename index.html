@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Generative Models for Computer Vision</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="CVPR 2026 Workshop">
+    <meta name="keywords" content="bootstrap, business, creative">
+    <meta name="author" content="Createx Studio">
+	  
+	  
+	  
+	  
+    <link rel="icon" href="./assets/img/logo.png">
+	  
+<!--     <meta property="og:image" content="https://fnzhan.github.io/neural-gauge-fields/img/ngf_logo.png"> -->
+
+    <!-- Viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta name="msapplication-config" content="./assets/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Vendor Styles -->
+    <link rel="stylesheet" media="screen" href="./assets/vendor/boxicons/css/boxicons.min.css"/>
+    <link rel="stylesheet" media="screen" href="./assets/vendor/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" media="screen" href="./assets/vendor/lightgallery/css/lightgallery-bundle.min.css"/>
+
+    <!-- Main Theme Styles + Bootstrap -->
+    <link rel="stylesheet" media="screen" href="./assets/css/theme.min.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Page loading styles -->
+    <style>
+      pre {
+        border: 1px solid #eff2fc;
+        display: none;
+        font-size: 12px;
+        margin: 5px 0;
+        max-width: 96%;
+        overflow: auto;
+        padding: 12px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .page-loading {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: all .4s .2s ease-in-out;
+        transition: all .4s .2s ease-in-out;
+        background-color: #fff;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 9999;
+      }
+      .dark-mode .page-loading {
+        background-color: #131022;
+      }
+      .page-loading.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .page-loading-inner {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -webkit-transition: opacity .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
+        opacity: 0;
+      }
+      .page-loading.active > .page-loading-inner {
+        opacity: 1;
+      }
+      .page-loading-inner > span {
+        display: block;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #9397ad;
+      }
+      .dark-mode .page-loading-inner > span {
+        color: #fff;
+        opacity: .6;
+      }
+      .page-spinner {
+        display: inline-block;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: .75rem;
+        vertical-align: text-bottom;
+        border: .15em solid #b4b7c9;
+        border-right-color: transparent;
+        border-radius: 50%;
+        -webkit-animation: spinner .75s linear infinite;
+        animation: spinner .75s linear infinite;
+      }
+      .dark-mode .page-spinner {
+        border-color: rgba(255,255,255,.4);
+        border-right-color: transparent;
+      }
+      @-webkit-keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinner {
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      #tracks ul {
+        line-height: 200%
+      }
+
+      #schedule th.time {
+        width: 200px
+      }
+
+      footer {
+        /*background-color: #131022;*/
+/*         background-image: url(../assets/img/backgrounds/footer-bg.jpg); */
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+      }
+
+      footer::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: '';
+        background-color: rgba(31, 39, 73, .97);
+      }
+
+      @media only screen and (max-width: 767px) {
+        .swiper-slide-active {
+          padding: 40px;
+        }
+      }
+    </style>
+
+      <style>
+  #schedule table td,
+  #schedule table th {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+</style>
+
+
+               <style>
+/* Artistic gradient overlay */
+.art-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(115deg, rgba(0,0,0,0.3) 0%, rgba(25,25,112,0.2) 50%, rgba(255,105,180,0.15) 100%);
+    mix-blend-mode: screen;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Grainy effect */
+.grainy-bg::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/asfalt-light.png'); /* You can swap this with a data URL or local PNG */
+    opacity: 0.04;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Title glow effect */
+.art-title {
+    font-size: 65px;
+    font-family: 'Calibri', sans-serif;
+    color: white;
+    font-weight: 650;
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(173, 216, 230, 0.4),
+        0 0 40px rgba(135, 206, 250, 0.2);
+    position: relative;
+    z-index: 3;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+    <!-- Theme mode -->
+    <script>
+      let mode = window.localStorage.getItem('mode'),
+          root = document.getElementsByTagName('html')[0];
+      if (mode !== undefined && mode === 'dark') {
+        root.classList.add('dark-mode');
+      } else {
+        root.classList.remove('dark-mode');
+      }
+    </script>
+
+    <!-- Page loading scripts -->
+    <script>
+      (function () {
+        window.onload = function () {
+          const preloader = document.querySelector('.page-loading');
+          preloader.classList.remove('active');
+          setTimeout(function () {
+            preloader.remove();
+          }, 1000);
+        };
+      })();
+    </script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  </head>
+
+
+  <!-- Body -->
+  <body>
+
+    <!-- Page loading spinner -->
+    <div class="page-loading active">
+      <div class="page-loading-inner">
+        <div class="page-spinner"></div><span>Loading...</span>
+      </div>
+    </div>
+    
+
+    <main class="page-wrapper">
+            <section class="jarallax dark-mode bg-dark py-xxl-5" data-jarallax data-speed="0.4">
+                <span class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-dark-translucent"></span>
+<!--                <div class="jarallax-img" style="-->
+<!--                    background-image: url(./data/bg.jpg);-->
+<!--                    filter: blur(3px);-->
+<!--                    transform: scale(1.0); /* prevents edges from showing when blurred */-->
+<!--                "></div>-->
+                <div class="jarallax-img" style="background-image: url(./data/bg.png);"></div>
+
+
+<!--                <div class="position-relative text-center zindex-5 ">-->
+
+                    <div class="position-relative text-center zindex-5 overflow-hidden pt-1 py-md-4">
+                    <p class="art-title" align="center">
+                        <span>4th Workshop on Generative Models <br> for Computer Vision</span>
+                    </p>
+
+<!--          <p style="font-size:65px; color:rgb(255, 255, 255); font-weight: 65" align="center"><b>3rd Workshop on Generative Models <br> for Computer Vision</b></p>-->
+
+
+           <p style="font-size:50px; color:rgb(255, 255, 255); font-weight: 50" align="center">CVPR 2026</p><br>
+          <p class="fs-4 text-light opacity-70 pb-2 mb-lg-5">
+                          <!-- <span style="font-size:1.3rem"> <i class="fa fa-calendar" style="color:#f029cf"></i> -->
+                              <!-- 8:45am - 5:00pm, Tuesday, June 11th, 2025  &nbsp; &nbsp; &nbsp; -->
+                              <i class="fa fa-map-marker" style="color:#f029cf"></i> Denver Convention Center, Denver, Colorado</span>
+                        </p>
+
+        </div>
+      </section>
+      <!-- tracks -->
+      <section id="tracks" class="container py-5">
+<!--         <div class="row pt-4 pb-3">
+          <h2 class="text-center text-sm-start pb-2 pb-lg-0">Challenge Tracks</h2>
+        </div> -->
+        <div class="row">
+	  <div class="row pt-4 pb-3">
+            <h2 class="text-center text-sm-start pb-2 pb-lg-0">Overview</h2>
+          </div>
+          <!-- Item -->
+<!--           <h3>Overview</h3> -->
+          <div class="col">
+            <p align="justify">
+                Recent advances in generative modeling leveraging generative adversarial networks, auto-regressive models,
+                neural fields and diffusion models have enabled the synthesis of near photorealistic images, drastically
+                increasing the visibility and popularity of generative modeling across the computer vision research community.
+                However, these impressive advances in generative modeling have not yet found wide adoption in computer vision
+                for visual recognition tasks. In this workshop, we aim to bring together researchers from the fields of image
+                synthesis and computer vision to facilitate discussions and progress at the intersection of those two subfields.
+                We investigate the question: "How can visual recognition benefit from the advances in generative image modeling?".
+                We invite a diverse set of experts to discuss their recent research results and future directions for generative
+                modeling and computer vision, with a particular focus on the intersection between image synthesis and visual
+                recognition. We hope this workshop will lay the foundation for future development of generative models for
+                computer vision tasks.
+            </p>
+
+            <div style="text-align: center;">
+		<img src="./data/overview.jpg" width="1200">
+	    </div>
+          </div>
+
+
+        </div>
+      </section>
+
+
+      <!-- Speakers -->
+      <section id="speakers" class="container py-5">
+        <div class="row pt-4 pb-3">
+          <h2 class="text-center text-sm-start pb-2 pb-lg-0">Invited Speakers</h2>
+        </div>
+        <div class="row justify-content-center">
+
+      <div class="col-md-3 py-3">
+               <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+                 <img src="./data/chelse.jpg" class="d-block rounded-circle mx-auto mb-3" width="162">
+                 <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://ai.stanford.edu/~cbfinn/" target="_blank">Chelsea Finn</a></h5>
+                 <p class="fs-md mb-3">Stanford University</p>
+                </div>
+              </div>
+
+            <div class="col-md-3 py-3">
+                <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+                  <img src="./data/efstratios.jpg" class="d-block rounded-circle mx-auto mb-3" width="162">
+                  <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://www.egavves.com/" target="_blank">Efstratios Gavves</a></h5>
+                  <p class="fs-sm mb-3">University of Amsterdam</p>
+                </div>
+              </div>
+
+
+
+	      <div class="col-md-3 py-3">
+                <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+                  <img src="./data/tali.jpg" class="d-block rounded-circle mx-auto mb-3" width="162">
+                  <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://www.weizmann.ac.il/math/dekel/home" target="_blank">Tali Dekel</a></h5>
+                  <p class="fs-md mb-3">Weizmann Institute of Science</p>
+                </div>
+              </div>
+
+
+
+	      <div class="col-md-3 py-3">
+                <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+                  <img src="./data/thomas.jpg" class="d-block rounded-circle mx-auto mb-3" width="162">
+                  <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://lmb.informatik.uni-freiburg.de/people/brox/" target="_blank">Thomas Brox</a></h5>
+                  <p class="fs-md mb-3">University of Freiburg</p>
+                </div>
+              </div>
+
+              <div class="col-md-3 py-3">
+                <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+                  <img src="./data/yilun.png" class="d-block rounded-circle mx-auto mb-3" width="162">
+                  <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://yilundu.github.io/" target="_blank">Yilun Du</a></h5>
+                  <p class="fs-md mb-3">Harvard University</p>
+                </div>
+              </div>
+
+
+	      <div class="col-md-3 py-3">
+                <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+                  <img src="./data/matthias.jpg" class="d-block rounded-circle mx-auto mb-3" width="162">
+                  <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://niessnerlab.org/" target="_blank">Matthias Niessner</a></h5>
+                  <p class="fs-md mb-3">TUM</p>
+                </div>
+              </div>
+
+
+	      <div class="col-md-3 py-3">
+                <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+                  <img src="./data/alan.jpeg" class="d-block rounded-circle mx-auto mb-3" width="162">
+                  <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://ccvl.jhu.edu/team/" target="_blank">Alan Yuille</a></h5>
+                  <p class="fs-md mb-3">JHU</p>
+                </div>
+              </div>
+
+
+      <section id="schedule" class="container py-5">
+          <div class="row pt-4 pb-3">
+            <h2 class="text-center text-sm-start pb-2 pb-lg-0">Schedule</h2>
+          </div>
+
+<!--          style="margin-left: 20px;"-->
+          <div style="margin-left: 120px;">
+                 <table class="table table-bordered compact-table">
+      <thead>
+        <tr>
+          <th>11th of June, 2025</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>8:45</td>
+          <td>Opening</td>
+        </tr>
+        <tr>
+          <td>9:00</td>
+          <td><strong>Rana Hanocka</strong>: Data-Driven Neural Mesh Editing – without 3D Data</td>
+        </tr>
+        <tr>
+          <td>9:40</td>
+          <td><strong>Yingnian Wu</strong>: SlowFast-VGen: Slow-Fast Learning for Action-Driven Long Video Generation</td>
+        </tr>
+        <tr>
+          <td>10:20</td>
+          <td>Coffee Break</td>
+        </tr>
+        <tr>
+          <td>10:40</td>
+          <td><strong>Björn Ommer</strong>: Bitter Lesson 2.0 – Boosting the Efficiency & Control of Generative Models</td>
+        </tr>
+        <tr>
+          <td>11:20</td>
+          <td><strong>Yiyi Liao</strong>: Towards Canonicalized 3D Generative Models</td>
+        </tr>
+        <tr>
+          <td>12:00</td>
+          <td>Lunch</td>
+        </tr>
+        <tr>
+          <td>13:00</td>
+          <td>Posters (ExHall D, poster boards #269 - #308)</td>
+        </tr>
+        <tr>
+          <td>14:00</td>
+          <td><strong>Alan Yuille</strong>: 3D Compositional Generative Models</td>
+        </tr>
+        <tr>
+          <td>14:40</td>
+          <td><strong>Jiatao Gu</strong>: Towards Spatial and Scalable Generative World Models</td>
+        </tr>
+        <tr>
+          <td>15:20</td>
+          <td>Coffee Break</td>
+        </tr>
+        <tr>
+          <td>15:40</td>
+          <td><strong>Kaiming He</strong>: Towards End-to-End Generative Modeling</td>
+        </tr>
+        <tr>
+          <td>16:20</td>
+          <td><strong>Zhuowen Tu</strong>: More or Less Bayesian with Diffusion Models?</td>
+        </tr>
+        <tr>
+          <td>17:00</td>
+          <td>Closing</td>
+        </tr>
+      </tbody>
+    </table>
+          </div>
+      </section>
+
+
+
+
+      <section id="submission" class="container py-5">
+          <div class="row pt-4 pb-3">
+            <h2 class="text-center text-sm-start pb-2 pb-lg-0">Covered Topics</h2>
+          </div>
+          <div class="row">
+            <div class="col">
+		    <ul style="font-size:15px;">
+		    <!-- <b>Submission site:</b> <a href="https://openreview.net/group?id=thecvf.com%2FCVPR%2F2025%2FWorkshop%2FGMCV#tab-recent-activity">OpenReview</a><br> -->
+			    <!-- <b>Author kit:</b> <a href="https://github.com/cvpr-org/author-kit/releases">CVPR Author KIT</a>.<br> -->
+                We invite submissions of <b>short papers</b> (4 page abstracts). Accepted submissions will be presented as posters at the workshop and selected papers will be presented as spotlights. Submissions to this workshop are non-archival, allowing for the inclusion of ongoing, unpublished work or dual submission.The short papers will <b> Not </b> be included in the proceedings of CVPR. References may be included on pages beyond the 4-page limit. <br>
+                Potential topics include but are not limited to:
+                        <br>
+
+                        <li style="margin-left:30px">
+                            Advances in generative image models
+                        </li>
+                        <li style="margin-left:30px">
+                            Inversion of generative image models
+                        </li>
+                        <li style="margin-left:30px">
+                            Training computer vision with realistic synthetic images
+                        </li>
+                        <li style="margin-left:30px">
+                            Benchmarking computer vision with generative models
+                        </li>
+                        <li style="margin-left:30px">
+                            Analysis-by-synthesis / render-and-compare approaches for visual recognition
+                        </li>
+                        <li style="margin-left:30px">
+                            Self-supervised learning with generative models
+                        </li>
+                        <li style="margin-left:30px">
+                            Adversarial attacks and defenses with generative models
+                        </li>
+                        <li style="margin-left:30px">
+                            Out-of-distribution generalization and detection with generative models
+                        </li>
+                        <li style="margin-left:30px">
+                            Ethical considerations in generative modeling, dataset and model biases
+                        </li>
+                </ul>
+
+                <br>
+              </div>
+        </div>
+
+<!--        </div>-->
+      </section>
+
+
+            <section id="dates" class="container py-5">
+        <div class="row pt-4 pb-3">
+          <div class="col-12">
+            <h2 class="text-center text-sm-start pb-2 pb-lg-0 mb-4 mb-lg-5">Important Dates</h2>
+          </div>
+          <div class="col-lg-9 offset-lg-1">
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <!-- Workshop -->
+              <div class="tab-pane fade show active" id="workshop" role="tabpanel" aria-labelledby="workshop-tab">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="event">Event</th>
+                        <th class="date">Date (Anywhere on Earth)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Workshop paper submission deadline</th>
+                        <td>TBD</td>
+                        <!-- <td>April 25, 2025 <del>March 25, 2025</del></td> -->
+                      </tr>
+                      <tr>
+                        <th scope="row">Decisions</th>
+                        <td>TBD</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+<!-- 
+            <section id="papers" class="container py-5">
+         <div class="row pt-4 pb-3">
+            <h2 class="text-center text-sm-start pb-2 pb-lg-0">Accepted Papers</h2>
+         </div>
+
+                <div style="margin-left: 60px;">
+            <ul>
+                <li>
+                     #269 <b>Diffusion Classifiers Understand Compositionality, but Conditions Apply</b> [<a href="papers/3.pdf">Paper</a>] <br>
+                    Yujin Jeong, Arnas Uselis, Seong Joon Oh, Anna Rohrbach
+                </li>
+                <li>
+                     #270 <b>Objaverse++: Curated 3D Object Dataset with Quality Annotations</b> [<a href="papers/4.pdf">Paper</a>] <br>
+                    Chendi Lin, Heshan Liu, Qunshu Lin, Zachary Bright, Shitao Tang, Yihui He, Minghao Liu, Ling Zhu, Cindy Le
+                </li>
+                <li>
+        #271 <b>DICE: Discrete Inversion Enabling Controllable Editing for Masked Generative Models</b> [<a href="papers/5.pdf">Paper</a>] <br>
+        Xiaoxiao He, Ligong Han, Quan Dao, Song Wen, Minhao Bai, Di Liu, Han Zhang, Felix Juefei-Xu, Chaowei Tan, Bo Liu, Martin Renqiang Min, Kang Li, Faez Ahmed, Akash Srivastava, Hongdong Li, Junzhou Huang, Dimitris N. Metaxas
+    </li>
+    <li>
+        #272 <b>Where Do Erased Concepts Go in Diffusion Models?</b> [<a href="papers/6.pdf">Paper</a>] <br>
+        Kevin Lu, Nicky Kriplani, Rohit Gandikota, Minh Pham, David Bau, Chinmay Hegde, Niv Cohen
+    </li>
+    <li>
+        #273 <b>MOVIS: Enhancing Multi-Object Novel View Synthesis for Indoor Scenes</b> [<a href="papers/8.pdf">Paper</a>] <br>
+        Ruijie Lu, Yixin Chen, Junfeng Ni, Baoxiong Jia, Yu Liu, Diwen Wan, Gang Zeng, Siyuan Huang
+    </li>
+                    <li>
+        #274 <b>"Principal Components" Enable A New Language of Images</b> [<a href="papers/10.pdf">Paper</a>] <br>
+        Xin Wen, Bingchen Zhao, Ismail Elezi, Jiankang Deng, Xiaojuan Qi
+    </li>
+    <li>
+        #275 <b>How Useful is the Density Learned by GANs for Computer Vision?</b> [<a href="papers/11.pdf">Paper</a>] <br>
+        Roy Friedman, Yair Weiss
+    </li>
+                <li>
+        #276 <b>Decompositional Neural Scene Reconstruction with Generative Diffusion Prior</b> [<a href="papers/12.pdf">Paper</a>] <br>
+        Junfeng Ni, Yu Liu, Ruijie Lu, ZiRui Zhou, Song-Chun Zhu, Yixin Chen, Siyuan Huang
+    </li>
+                                <li>
+        #277 <b>Around the World in 80 Timesteps: A Generative Approach to Global Visual Geolocation</b> [<a href="papers/14.pdf">Paper</a>] <br>
+        Nicolas Dufour, David Picard, Vicky Kalogeiton, Loic Landrieu
+    </li>
+                <li>
+        #278 <b>M3Face: A Unified Multi-Modal Multilingual Framework for Human Face Generation and Editing</b> [<a href="papers/19.pdf">Paper</a>] <br>
+        Mohammadreza Mofayezi, Reza Alipour, Mohammad Ali Kakavand, Ehsaneddin Asgari
+    </li>
+                <li>
+        #279 <b>WorldGenBench: A World-Knowledge-Integrated Benchmark for Reasoning-Driven Text-to-Image Generation</b> [<a href="papers/20.pdf">Paper</a>] <br>
+        Daoan Zhang, Che Jiang, Ruoshi Xu, Biaoxiang Chen, Zijian Jin, Yutian Lu, Jianguo Zhang, Yong Liang, Jiebo Luo, Shengda Luo
+    </li>
+                <li>
+        #280 <b>TopoCellGen: Generating Histopathology Cell Topology with a Diffusion Model</b> [<a href="papers/21.pdf">Paper</a>] <br>
+        Meilong Xu, Saumya Gupta, Xiaoling Hu, Chen Li, Shahira Abousamra, Dimitris Samaras, Prateek Prasanna, Chao Chen
+    </li>
+                <li>
+        #281 <b>EscherNet++: Simultaneous Amodal Completion and Scalable View Synthesis</b> [<a href="papers/22.pdf">Paper</a>] <br>
+        Xinan Zhang, Muhammad Zubair Irshad, Anthony Yezzi, Yi-Chang Tsai, Zsolt Kira
+    </li>
+    <li>
+        #282 <b>Emergence and Evolution of Interpretable Concepts in Diffusion Models Through the Lens of Sparse Autoencoders</b> [<a href="papers/24.pdf">Paper</a>] <br>
+        Berk Tinaz, Zalan Fabian, Mahdi Soltanolkotabi
+    </li>
+
+    <li>
+        #283 <b>An Image-to-Music Generation Framework Powered by An Algorithm-Driven Music Core</b> [<a href="papers/26.pdf">Paper</a>] <br>
+        Callie C. Liao, Duoduo Liao, Ellie L. Zhang
+    </li>
+    <li>
+        #284 <b>Particle-based 6D Object Pose Estimation from Point Clouds using Diffusion Models</b> [<a href="papers/28.pdf">Paper</a>] <br>
+        Christian Möller, Niklas Funk, Jan Peters
+    </li>
+    <li>
+        #285 <b>Learn Your Scales: Towards Scale-Consistent Generative Novel View Synthesis</b> [<a href="papers/30.pdf">Paper</a>] <br>
+        Fereshteh Forghani, Jason J. Yu, Tristan Aumentado-Armstrong, Konstantinos G. Derpanis, Marcus A. Brubaker
+    </li>
+                <li>
+        #286 <b>Masks make discriminative models great again!</b> [<a href="papers/32.pdf">Paper</a>] <br>
+        Tianshi Cao, Marie-Julie Rakotosaona, Ben Poole, Federico Tombari, Michael Niemeyer
+    </li>
+    <li>
+        #287 <b>VideoHandles: Editing 3D Object Compositions in Videos Using Video Generative Priors</b> [<a href="papers/33.pdf">Paper</a>] <br>
+        Juil Koo, Paul Guerrero, Chun-Hao P. Huang, Duygu Ceylan, Minhyuk Sung
+    </li>
+                <li>
+        #288 <b>S3D: Sketch-Driven 3D Model Generation</b> [<a href="papers/37.pdf">Paper</a>] <br>
+        Hail Song, Wonsik Shin, Naeun Lee, Soomin Chung, Nojun Kwak, Woontack Woo
+    </li>
+    <li>
+        #289 <b>Towards Efficient Vision Transformers for Perceptual Quality Assessment of Diffusion-Generated Images</b> [<a href="papers/40.pdf">Paper</a>] <br>
+        Shivam Bhardwaj, Tushar Shinde
+    </li>
+    <li>
+        #290 <b>GaussianVAE: Adaptive Learning Dynamics of 3D Gaussians for High-Fidelity Super-Resolution</b> [<a href="papers/42.pdf">Paper</a>] <br>
+        Shuja Khalid, Mohamed Ibrahim, Yang Liu
+    </li>
+                <li>
+        #291 <b>Fine-Grained Guidance for Image Generation</b> [<a href="papers/44.pdf">Paper</a>] <br>
+        Nguyen Xuan Nam, Hidetomo Sakaino
+    </li>
+    <li>
+        #292 <b>HandsOnVLM: Vision-Language Models for Hand-Object Interaction Prediction</b> [<a href="papers/45.pdf">Paper</a>] <br>
+        Chen Bao, Jiarui Xu, Xiaolong Wang, Abhinav Gupta, Homanga Bharadhwaj
+    </li>
+    <li>
+        #293 <b>Flow-Optimizer: Revealing an Optimizable Flow Latent Space via One-Step Inversion for Controlled Interpolation and Editing</b> [<a href="papers/48.pdf">Paper</a>] <br>
+        Yan Zheng, Yi Yang
+    </li>
+    <li>
+        #294 <b>Bernoulli Priors as Efficient Denoising Guides for Diffusion Models</b> [<a href="papers/49.pdf">Paper</a>] <br>
+        Magdalena Proszewska, Nikolay Malkin, N. Siddharth
+    </li>
+    <li>
+        #295 <b>Guiding Diffusion with Deep Geometric Moments: Balancing Fidelity and Variation</b> [<a href="papers/50.pdf">Paper</a>] <br>
+        Sangmin Jung, Utkarsh Nath, Yezhou Yang, Giulia Pedrielli, Joydeep Biswas, Amy Zhang, Hassan Ghasemzadeh, Pavan Turaga
+    </li>
+    <li>
+        #296 <b>Scaled Momentum Guidance for Flow Models</b> [<a href="papers/51.pdf">Paper</a>] <br>
+        Wooyeol Baek, Seongdo Kim, Jinseong Kim, Jongyoo Kim
+    </li>
+    <li>
+        #297 <b>FreSca: Scaling in Frequency Space Enhances Diffusion Models</b> [<a href="papers/54.pdf">Paper</a>] <br>
+        Chao Huang, Susan Liang, Yunlong Tang, Jing Bi, Li Ma, Yapeng Tian, Chenliang Xu
+    </li>
+    <li>
+        #298 <b>Progressive Prompt Detailing for Improved Alignment in Text-to-Image Generative Models</b> [<a href="papers/55.pdf">Paper</a>] <br>
+        Ketan Suhaas Saichandran, Xavier Thomas, Prakhar Kaushik, Deepti Ghadiyaram
+    </li>
+    <li>
+        #299 <b>Panoptic Diffusion Models: Co-generation of Images and Segmentation Maps</b> [<a href="papers/56.pdf">Paper</a>] <br>
+        Yinghan Long, Kaushik Roy
+    </li>
+    <li>
+        #300 <b>Boosting Adversarial Transferability with a Generative Model Perspective</b> [<a href="papers/57.pdf">Paper</a>] <br>
+        Jongoh Jeong, Hunmin Yang, Kuk-Jin Yoon
+    </li>
+    <li>
+        #301 <b>ConceptMix++: Leveling the Playing Field in Text-to-Image Benchmarking via Iterative Prompt Optimization</b> [<a href="papers/58.pdf">Paper</a>] <br>
+        Haosheng Gan, Berk Tinaz, Mohammad Shahab Sepehri, Zalan Fabian, Mahdi Soltanolkotabi
+    </li>
+    <li>
+        #302 <b>Rectified CFG++ for Flow Based Models</b> [<a href="papers/59.pdf">Paper</a>] <br>
+        Shreshth Saini, Shashank Gupta, Alan C. Bovik
+    </li>
+    <li>
+        #303 <b>Generative Defect Synthesis for Enhancing Industrial Anomaly Detection</b> [<a href="papers/62.pdf">Paper</a>] <br>
+        Avinash Kumar Sharma, Tushar Shinde
+    </li>
+    <li>
+        #304 <b>Pixel-Aligned Multi-View Generation with Depth Guided Decoder</b> [<a href="papers/64.pdf">Paper</a>] <br>
+        Zhenggang Tang, Peiye Zhuang, Chaoyang Wang, Aliaksandr Siarohin, Yash Kant, Alexander Schwing, Sergey Tulyakov, Hsin-Ying Lee
+    </li>
+                <li>
+        #305 <b>LumiNet: Latent Intrinsics Meets Diffusion Models for Indoor Scene Relighting</b> [<a href="papers/65.pdf">Paper</a>] <br>
+        Xiaoyan Xing, Konrad Groh, Sezer Karaoglu, Theo Gevers, Anand Bhattad
+    </li>
+    <li>
+        #306 <b>Generative Modeling of Weights: Generalization or Memorization?</b> [<a href="papers/66.pdf">Paper</a>] <br>
+        Boya Zeng, Yida Yin, Zhiqiu Xu, Zhuang Liu
+    </li>
+    <li>
+        #307 <b>Spatial Transport Optimization by Repositioning Attention Map for Training-Free Text-to-Image Synthesis</b> [<a href="papers/68.pdf">Paper</a>] <br>
+        Woojung Han, Yeonkyung Lee, Chanyoung Kim, Kwanghyun Park, Seong Jae Hwang
+    </li>
+                <li>
+        #308 <b>Visual Acoustic Fields</b> [<a href="papers/69.pdf">Paper</a>] <br>
+        Yuelei Li, Hyunjin Kim, Fangneng Zhan, Ri-Zhao Qiu, Mazeyu Ji, Xiaojun Shan, Xueyan Zou, Paul Liang, Hanspeter Pfister, Xiaolong Wang
+    </li>
+</ul>
+                </div>
+
+    </section> -->
+
+
+
+
+
+<section id="organizers" class="container py-5">
+  <div class="container">
+    <div class="row pt-4 pb-3">
+      <h2 class="text-center text-sm-start pb-2 pb-lg-0">Organizers</h2>
+    </div>
+
+    <!-- First Row: Three Images -->
+    <div class="row justify-content-center">
+      <div class="col-md-3 py-3">
+        <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+          <img src="./data/adam.jpeg" class="d-block rounded-circle mx-auto mb-3" width="162" alt="Adam Kortylewski">
+          <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://gvrl.mpi-inf.mpg.de/" target="_blank">Adam Kortylewski</a></h5>
+          <p class="fs-md mb-3">MPI-INF &thinsp;&amp;&thinsp; Uni of Freiburg</p>
+        </div>
+      </div>
+
+      <div class="col-md-3 py-3">
+        <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+          <img src="./data/fangneng.png" class="d-block rounded-circle mx-auto mb-3" width="162" alt="Fangneng Zhan">
+          <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://fnzhan.com/" target="_blank">Fangneng Zhan</a></h5>
+          <p class="fs-md mb-3">Harvard University &thinsp;&amp;&thinsp; MIT</p>
+        </div>
+      </div>
+
+
+    <!-- Second Row: Two Images -->
+      <div class="row justify-content-center">
+        <div class="col-md-3 py-3">
+        <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+          <img src="./data/jieneng.png" class="d-block rounded-circle mx-auto mb-3" width="162" alt="Jieneng Chen">
+          <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://beckschen.github.io/" target="_blank">Jieneng Chen</a></h5>
+          <p class="fs-md mb-3">JHU</p>
+        </div>
+      </div>
+
+      <div class="col-md-3 py-3">
+        <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+          <img src="./data/christian.png" class="d-block rounded-circle mx-auto mb-3" width="162" alt="Christian Theobalt">
+          <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://people.mpi-inf.mpg.de/~theobalt/" target="_blank">Christian Theobalt</a></h5>
+          <p class="fs-md mb-3">MPI-INF</p>
+        </div>
+      </div>
+
+      <div class="col-md-3 py-3">
+        <div class="card card-body card-hover bg-light border-0 text-center mx-2">
+          <img src="./data/alan.jpeg" class="d-block rounded-circle mx-auto mb-3" width="162" alt="Alan Yuille">
+          <h5 class="fw-medium fs-lg mb-1"><a style="text-decoration:none" href="https://www.cs.jhu.edu/~ayuille/" target="_blank">Alan Yuille</a></h5>
+          <p class="fs-md mb-3">JHU</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<hr>
+
+
+      <br>
+      <br>
+      <br>
+<!--      <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=84848c&w=400&t=tt&d=2JHVvnU97UBcQG0xYLAvglePjkssjDLpbeRhZQhM_1s&co=a1cded&ct=ffffff&cmo=3acc3a&cmn=ff5353'></script>-->
+<!--<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=474747&w=386&t=n&d=_KRcvWlAZADIQTJh5QCVWaDrwAtwPMAffAZq-yBjTao&co=85bde5'></script>-->
+<!--            <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=877878&w=300&t=n&d=wF1rRdzVC4vl2V0_IjspEdKgJjoN3q5xBhzXi5m7-44&co=7ebfed'></script>-->
+
+            <!-- <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=7c7c7c&w=400&t=n&d=wF1rRdzVC4vl2V0_IjspEdKgJjoN3q5xBhzXi5m7-44&co=84c9f9'></script> -->
+      <br>
+      <br>
+      <br>
+
+
+
+
+
+    <style>
+      .img-container {
+        text-align: center;
+        display: block;
+      }
+    </style>
+
+<!--   <br> -->
+  
+
+
+  </main>
+    <!-- Footer -->
+
+    <!-- Back to top button -->
+    <a href="#top" class="btn-scroll-top" data-scroll>
+      <span class="btn-scroll-top-tooltip text-muted fs-sm me-2">Top</span>
+      <i class="btn-scroll-top-icon bx bx-chevron-up"></i>
+    </a>
+
+
+    <!-- Vendor Scripts -->
+    <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="./assets/vendor/lightgallery/lightgallery.min.js"></script>
+    <script src="./assets/vendor/lightgallery/plugins/fullscreen/lg-fullscreen.min.js"></script>
+    <script src="./assets/vendor/lightgallery/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="./assets/vendor/lightgallery/plugins/video/lg-video.min.js"></script>
+
+    <!-- Main Theme Script -->
+    <script src="./assets/js/theme.min.js"></script>
+    <script>
+      document.addEventListener('scroll', function(e) {
+        let currentOffset = window.scrollY + 80,
+            currentSection = "",
+            sections = ["tracks", "submission", "dates", "schedule", "speakers", "organizers", "awards", "previous"];
+
+        for (let i = 0; i < sections.length; ++ i) {
+          if (currentOffset < document.getElementById(sections[i]).offsetTop) {
+            break;
+          }
+          currentSection = sections[i];
+        }
+
+        let navbar = document.getElementsByClassName("navbar-nav")[0],
+            navLinks = navbar.getElementsByTagName("a");
+
+        for (let i = 0; i < navLinks.length; ++ i) {
+          navLinks[i].classList.remove("active");
+          if (navLinks[i].getAttribute("href") == "#" + currentSection) {
+            navLinks[i].classList.add("active");
+          }
+        }
+      })
+    </script>
+    <script type="text/javascript">
+      $('#schedule').on('click', '.abstract', function () {
+          var bibtexBlock = $('pre', $(this).parent().parent().parent()),
+              isVisible = bibtexBlock.is(':visible')
+            
+          if (isVisible) {
+              bibtexBlock.slideUp(36)
+          } else {
+              bibtexBlock.slideDown(36)
+          }
+      })
+      </script>
+
+    </body>
+</html>
