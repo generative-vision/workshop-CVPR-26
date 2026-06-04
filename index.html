@@ -134,6 +134,37 @@
         line-height: 200%
       }
 
+      #papers li {
+        margin-bottom: 0.45rem;
+      }
+
+      #papers li.best-paper {
+        background: linear-gradient(90deg, rgba(240, 180, 41, 0.14), rgba(240, 180, 41, 0.03));
+        border-left: 3px solid #d69e2e;
+        border-radius: 6px;
+        margin-left: -0.75rem;
+        padding: 0.45rem 0.7rem 0.45rem 0.85rem;
+      }
+
+      #papers li.best-paper::marker {
+        color: #b7791f;
+      }
+
+      #papers .best-paper-label {
+        background: #fff3c4;
+        border: 1px solid rgba(214, 158, 46, 0.42);
+        border-radius: 4px;
+        color: #7a4b00;
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        margin-right: 0.45rem;
+        padding: 0.08rem 0.42rem;
+        text-transform: uppercase;
+        vertical-align: 0.08rem;
+      }
+
       #schedule th.time {
         width: 200px
       }
@@ -536,7 +567,7 @@
       </section>
 
 
-            <section id="dates" class="container py-5">
+      <section id="dates" class="container py-5">
         <div class="row pt-4 pb-3">
           <div class="col-12">
             <h2 class="text-center text-sm-start pb-2 pb-lg-0 mb-4 mb-lg-5">Important Dates</h2>
@@ -574,183 +605,118 @@
           </div>
         </div>
       </section>
+      
+      
+      
+      
+      
+      <section id="papers" class="container py-5">
+        <div class="row pt-4 pb-3">
+          <h2 class="text-center text-sm-start pb-2 pb-lg-0">Accepted Papers</h2>
+        </div>
 
+        <div style="margin-left: 60px;">
+          <ul>
+            <li>
+              <b>Re-Depth Anything: Test-Time Depth Refinement via Self-Supervised Re-lighting</b> [<a href="papers/2.pdf">Paper</a>] <br>
+            </li>
+            <li class="best-paper">
+              <span class="best-paper-label">Best Paper</span><b>FreeOrbit4D: Training-Free Arbitrary Camera Redirection for Monocular Videos via Foreground-Complete 4D Reconstruction</b> [<a href="papers/3.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Selective Timestep Weighting and Advantage-Based Replay for Sample-Efficient Diffusion RLHF</b> [<a href="papers/4.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Learning from Semantic Dictionaries: Discriminative Codebook Contrastive Learning for Unified Visual Representation and Generation</b> [<a href="papers/5.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>MatLat: Material Latent Space for PBR Texture Generation</b> [<a href="papers/6.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Scale Space Diffusion</b> [<a href="papers/7.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Novel View Extrapolation with Video Diffusion Priors</b> [<a href="papers/8.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Are Image Generators Zero-shot Perceivers? A Rigorous Evaluation</b> [<a href="papers/10.pdf">Paper</a>] <br>
+            </li>
+            <li class="best-paper">
+              <span class="best-paper-label">Best Paper</span><b>RISE: Single Static Radar-based Indoor Scene Understanding</b> [<a href="papers/12.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Frequency-Aware Mamba Encoder for Spatial Reasoning</b> [<a href="papers/13.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Less Is More: Training-Free Acceleration of Identity-Preserved Generation</b> [<a href="papers/14.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Guidance for Low-Level Perceptual Editing in Unconditional Diffusion Models</b> [<a href="papers/15.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>RareCrafter: Controllable Generative Augmentation for Rare Object Detection in Driving Scenes</b> [<a href="papers/16.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Early Commitment Without Revision: Diagnosing Sampling Instability in Binary Masked Generative Models</b> [<a href="papers/17.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>SeeThrough3D: Occlusion Aware 3D Control in Text-to-Image Generation</b> [<a href="papers/18.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Scaling Laws for Synthetic Data Substitution: Architecture-Dependent Degradation in Vision Models</b> [<a href="papers/19.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Do Safety-Aligned Vision-Language Models Degrade Differently Under Common Image Corruptions?</b> [<a href="papers/21.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Do Synthetic Images Help Small-Scale Visual Classification? A Preliminary CIFAR-10 Study with Classical, Deep, and Generative Augmentations</b> [<a href="papers/22.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Breaking Spurious Correlations via Generative Randomization and Cross-Variant Self-Supervised Learning</b> [<a href="papers/23.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Post-Training Strains Diffusion Models: A Stability Analysis of Distillation, Robustness, and Unlearning</b> [<a href="papers/24.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Personalized Generative Models for Contextual Debiasing</b> [<a href="papers/25.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>SIGMA-GEN: Structure and Identity Guided Multi-subject Assembly for Image Generation</b> [<a href="papers/26.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Beyond Flat Latent: Scale-Aware Disentanglement in Hierarchical Latent Spaces</b> [<a href="papers/27.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Graph Connectivity via Spring Energy for Detailed Captioning in Large Vision-Language Models</b> [<a href="papers/28.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>ATHENA: Adaptive Test-Time Steering for Improving Count Fidelity in Diffusion Models</b> [<a href="papers/29.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Generative Transformer for Auto Computer-aided Design</b> [<a href="papers/30.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>$\text{PartConcepts}$: A Unified Mechanism for Fine-Grained Part Localization and Generation</b> [<a href="papers/31.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Anchored Generation: Controllable Scene Variation via 3D-Aware Object Latents</b> [<a href="papers/32.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Let&rsquo;s Fix Step-by-Step: Iterative Refinement for Compositional Image Generation</b> [<a href="papers/33.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>Factored Generative Models through Mechanism Diversity</b> [<a href="papers/35.pdf">Paper</a>] <br>
+            </li>
+            <li>
+              <b>WaveletFlow: Spatially-Localized Frequency Mixing for Flow Matching in PDE Turbulence Modeling</b> [<a href="papers/36.pdf">Paper</a>] <br>
+            </li>
+            <li class="best-paper">
+              <span class="best-paper-label">Best Paper</span><b>A Simple and Effective Zero-Shot Framework for Dynamic 3D World Modeling</b> [<a href="papers/38.pdf">Paper</a>] <br>
+            </li>
+          </ul>
+        </div>
 
-
-
-<!-- 
-            <section id="papers" class="container py-5">
-         <div class="row pt-4 pb-3">
-            <h2 class="text-center text-sm-start pb-2 pb-lg-0">Accepted Papers</h2>
-         </div>
-
-                <div style="margin-left: 60px;">
-            <ul>
-                <li>
-                     #269 <b>Diffusion Classifiers Understand Compositionality, but Conditions Apply</b> [<a href="papers/3.pdf">Paper</a>] <br>
-                    Yujin Jeong, Arnas Uselis, Seong Joon Oh, Anna Rohrbach
-                </li>
-                <li>
-                     #270 <b>Objaverse++: Curated 3D Object Dataset with Quality Annotations</b> [<a href="papers/4.pdf">Paper</a>] <br>
-                    Chendi Lin, Heshan Liu, Qunshu Lin, Zachary Bright, Shitao Tang, Yihui He, Minghao Liu, Ling Zhu, Cindy Le
-                </li>
-                <li>
-        #271 <b>DICE: Discrete Inversion Enabling Controllable Editing for Masked Generative Models</b> [<a href="papers/5.pdf">Paper</a>] <br>
-        Xiaoxiao He, Ligong Han, Quan Dao, Song Wen, Minhao Bai, Di Liu, Han Zhang, Felix Juefei-Xu, Chaowei Tan, Bo Liu, Martin Renqiang Min, Kang Li, Faez Ahmed, Akash Srivastava, Hongdong Li, Junzhou Huang, Dimitris N. Metaxas
-    </li>
-    <li>
-        #272 <b>Where Do Erased Concepts Go in Diffusion Models?</b> [<a href="papers/6.pdf">Paper</a>] <br>
-        Kevin Lu, Nicky Kriplani, Rohit Gandikota, Minh Pham, David Bau, Chinmay Hegde, Niv Cohen
-    </li>
-    <li>
-        #273 <b>MOVIS: Enhancing Multi-Object Novel View Synthesis for Indoor Scenes</b> [<a href="papers/8.pdf">Paper</a>] <br>
-        Ruijie Lu, Yixin Chen, Junfeng Ni, Baoxiong Jia, Yu Liu, Diwen Wan, Gang Zeng, Siyuan Huang
-    </li>
-                    <li>
-        #274 <b>"Principal Components" Enable A New Language of Images</b> [<a href="papers/10.pdf">Paper</a>] <br>
-        Xin Wen, Bingchen Zhao, Ismail Elezi, Jiankang Deng, Xiaojuan Qi
-    </li>
-    <li>
-        #275 <b>How Useful is the Density Learned by GANs for Computer Vision?</b> [<a href="papers/11.pdf">Paper</a>] <br>
-        Roy Friedman, Yair Weiss
-    </li>
-                <li>
-        #276 <b>Decompositional Neural Scene Reconstruction with Generative Diffusion Prior</b> [<a href="papers/12.pdf">Paper</a>] <br>
-        Junfeng Ni, Yu Liu, Ruijie Lu, ZiRui Zhou, Song-Chun Zhu, Yixin Chen, Siyuan Huang
-    </li>
-                                <li>
-        #277 <b>Around the World in 80 Timesteps: A Generative Approach to Global Visual Geolocation</b> [<a href="papers/14.pdf">Paper</a>] <br>
-        Nicolas Dufour, David Picard, Vicky Kalogeiton, Loic Landrieu
-    </li>
-                <li>
-        #278 <b>M3Face: A Unified Multi-Modal Multilingual Framework for Human Face Generation and Editing</b> [<a href="papers/19.pdf">Paper</a>] <br>
-        Mohammadreza Mofayezi, Reza Alipour, Mohammad Ali Kakavand, Ehsaneddin Asgari
-    </li>
-                <li>
-        #279 <b>WorldGenBench: A World-Knowledge-Integrated Benchmark for Reasoning-Driven Text-to-Image Generation</b> [<a href="papers/20.pdf">Paper</a>] <br>
-        Daoan Zhang, Che Jiang, Ruoshi Xu, Biaoxiang Chen, Zijian Jin, Yutian Lu, Jianguo Zhang, Yong Liang, Jiebo Luo, Shengda Luo
-    </li>
-                <li>
-        #280 <b>TopoCellGen: Generating Histopathology Cell Topology with a Diffusion Model</b> [<a href="papers/21.pdf">Paper</a>] <br>
-        Meilong Xu, Saumya Gupta, Xiaoling Hu, Chen Li, Shahira Abousamra, Dimitris Samaras, Prateek Prasanna, Chao Chen
-    </li>
-                <li>
-        #281 <b>EscherNet++: Simultaneous Amodal Completion and Scalable View Synthesis</b> [<a href="papers/22.pdf">Paper</a>] <br>
-        Xinan Zhang, Muhammad Zubair Irshad, Anthony Yezzi, Yi-Chang Tsai, Zsolt Kira
-    </li>
-    <li>
-        #282 <b>Emergence and Evolution of Interpretable Concepts in Diffusion Models Through the Lens of Sparse Autoencoders</b> [<a href="papers/24.pdf">Paper</a>] <br>
-        Berk Tinaz, Zalan Fabian, Mahdi Soltanolkotabi
-    </li>
-
-    <li>
-        #283 <b>An Image-to-Music Generation Framework Powered by An Algorithm-Driven Music Core</b> [<a href="papers/26.pdf">Paper</a>] <br>
-        Callie C. Liao, Duoduo Liao, Ellie L. Zhang
-    </li>
-    <li>
-        #284 <b>Particle-based 6D Object Pose Estimation from Point Clouds using Diffusion Models</b> [<a href="papers/28.pdf">Paper</a>] <br>
-        Christian Möller, Niklas Funk, Jan Peters
-    </li>
-    <li>
-        #285 <b>Learn Your Scales: Towards Scale-Consistent Generative Novel View Synthesis</b> [<a href="papers/30.pdf">Paper</a>] <br>
-        Fereshteh Forghani, Jason J. Yu, Tristan Aumentado-Armstrong, Konstantinos G. Derpanis, Marcus A. Brubaker
-    </li>
-                <li>
-        #286 <b>Masks make discriminative models great again!</b> [<a href="papers/32.pdf">Paper</a>] <br>
-        Tianshi Cao, Marie-Julie Rakotosaona, Ben Poole, Federico Tombari, Michael Niemeyer
-    </li>
-    <li>
-        #287 <b>VideoHandles: Editing 3D Object Compositions in Videos Using Video Generative Priors</b> [<a href="papers/33.pdf">Paper</a>] <br>
-        Juil Koo, Paul Guerrero, Chun-Hao P. Huang, Duygu Ceylan, Minhyuk Sung
-    </li>
-                <li>
-        #288 <b>S3D: Sketch-Driven 3D Model Generation</b> [<a href="papers/37.pdf">Paper</a>] <br>
-        Hail Song, Wonsik Shin, Naeun Lee, Soomin Chung, Nojun Kwak, Woontack Woo
-    </li>
-    <li>
-        #289 <b>Towards Efficient Vision Transformers for Perceptual Quality Assessment of Diffusion-Generated Images</b> [<a href="papers/40.pdf">Paper</a>] <br>
-        Shivam Bhardwaj, Tushar Shinde
-    </li>
-    <li>
-        #290 <b>GaussianVAE: Adaptive Learning Dynamics of 3D Gaussians for High-Fidelity Super-Resolution</b> [<a href="papers/42.pdf">Paper</a>] <br>
-        Shuja Khalid, Mohamed Ibrahim, Yang Liu
-    </li>
-                <li>
-        #291 <b>Fine-Grained Guidance for Image Generation</b> [<a href="papers/44.pdf">Paper</a>] <br>
-        Nguyen Xuan Nam, Hidetomo Sakaino
-    </li>
-    <li>
-        #292 <b>HandsOnVLM: Vision-Language Models for Hand-Object Interaction Prediction</b> [<a href="papers/45.pdf">Paper</a>] <br>
-        Chen Bao, Jiarui Xu, Xiaolong Wang, Abhinav Gupta, Homanga Bharadhwaj
-    </li>
-    <li>
-        #293 <b>Flow-Optimizer: Revealing an Optimizable Flow Latent Space via One-Step Inversion for Controlled Interpolation and Editing</b> [<a href="papers/48.pdf">Paper</a>] <br>
-        Yan Zheng, Yi Yang
-    </li>
-    <li>
-        #294 <b>Bernoulli Priors as Efficient Denoising Guides for Diffusion Models</b> [<a href="papers/49.pdf">Paper</a>] <br>
-        Magdalena Proszewska, Nikolay Malkin, N. Siddharth
-    </li>
-    <li>
-        #295 <b>Guiding Diffusion with Deep Geometric Moments: Balancing Fidelity and Variation</b> [<a href="papers/50.pdf">Paper</a>] <br>
-        Sangmin Jung, Utkarsh Nath, Yezhou Yang, Giulia Pedrielli, Joydeep Biswas, Amy Zhang, Hassan Ghasemzadeh, Pavan Turaga
-    </li>
-    <li>
-        #296 <b>Scaled Momentum Guidance for Flow Models</b> [<a href="papers/51.pdf">Paper</a>] <br>
-        Wooyeol Baek, Seongdo Kim, Jinseong Kim, Jongyoo Kim
-    </li>
-    <li>
-        #297 <b>FreSca: Scaling in Frequency Space Enhances Diffusion Models</b> [<a href="papers/54.pdf">Paper</a>] <br>
-        Chao Huang, Susan Liang, Yunlong Tang, Jing Bi, Li Ma, Yapeng Tian, Chenliang Xu
-    </li>
-    <li>
-        #298 <b>Progressive Prompt Detailing for Improved Alignment in Text-to-Image Generative Models</b> [<a href="papers/55.pdf">Paper</a>] <br>
-        Ketan Suhaas Saichandran, Xavier Thomas, Prakhar Kaushik, Deepti Ghadiyaram
-    </li>
-    <li>
-        #299 <b>Panoptic Diffusion Models: Co-generation of Images and Segmentation Maps</b> [<a href="papers/56.pdf">Paper</a>] <br>
-        Yinghan Long, Kaushik Roy
-    </li>
-    <li>
-        #300 <b>Boosting Adversarial Transferability with a Generative Model Perspective</b> [<a href="papers/57.pdf">Paper</a>] <br>
-        Jongoh Jeong, Hunmin Yang, Kuk-Jin Yoon
-    </li>
-    <li>
-        #301 <b>ConceptMix++: Leveling the Playing Field in Text-to-Image Benchmarking via Iterative Prompt Optimization</b> [<a href="papers/58.pdf">Paper</a>] <br>
-        Haosheng Gan, Berk Tinaz, Mohammad Shahab Sepehri, Zalan Fabian, Mahdi Soltanolkotabi
-    </li>
-    <li>
-        #302 <b>Rectified CFG++ for Flow Based Models</b> [<a href="papers/59.pdf">Paper</a>] <br>
-        Shreshth Saini, Shashank Gupta, Alan C. Bovik
-    </li>
-    <li>
-        #303 <b>Generative Defect Synthesis for Enhancing Industrial Anomaly Detection</b> [<a href="papers/62.pdf">Paper</a>] <br>
-        Avinash Kumar Sharma, Tushar Shinde
-    </li>
-    <li>
-        #304 <b>Pixel-Aligned Multi-View Generation with Depth Guided Decoder</b> [<a href="papers/64.pdf">Paper</a>] <br>
-        Zhenggang Tang, Peiye Zhuang, Chaoyang Wang, Aliaksandr Siarohin, Yash Kant, Alexander Schwing, Sergey Tulyakov, Hsin-Ying Lee
-    </li>
-                <li>
-        #305 <b>LumiNet: Latent Intrinsics Meets Diffusion Models for Indoor Scene Relighting</b> [<a href="papers/65.pdf">Paper</a>] <br>
-        Xiaoyan Xing, Konrad Groh, Sezer Karaoglu, Theo Gevers, Anand Bhattad
-    </li>
-    <li>
-        #306 <b>Generative Modeling of Weights: Generalization or Memorization?</b> [<a href="papers/66.pdf">Paper</a>] <br>
-        Boya Zeng, Yida Yin, Zhiqiu Xu, Zhuang Liu
-    </li>
-    <li>
-        #307 <b>Spatial Transport Optimization by Repositioning Attention Map for Training-Free Text-to-Image Synthesis</b> [<a href="papers/68.pdf">Paper</a>] <br>
-        Woojung Han, Yeonkyung Lee, Chanyoung Kim, Kwanghyun Park, Seong Jae Hwang
-    </li>
-                <li>
-        #308 <b>Visual Acoustic Fields</b> [<a href="papers/69.pdf">Paper</a>] <br>
-        Yuelei Li, Hyunjin Kim, Fangneng Zhan, Ri-Zhao Qiu, Mazeyu Ji, Xiaojun Shan, Xueyan Zou, Paul Liang, Hanspeter Pfister, Xiaolong Wang
-    </li>
-</ul>
-                </div>
-
-    </section> -->
+    </section>
 
 
 
